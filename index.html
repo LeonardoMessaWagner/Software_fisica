@@ -54,24 +54,26 @@
     <body>
      <div class="container mt-2">
        <div class="row align-items-center" style="height:600px; border: solid;background-color: rgb(151, 208, 255);">
-       
-            <div id="mydiv">
-                <div id="mydivheader"><img src="Imagens/ima.png"></div>
-            </div>
+      <div id="mydiv">
+            <div >
+                <div id="mydivheader"><img  src="Imagens/ima.png"></div>
+            
+            
+          </div>
+          <div class="row align-items-center">
           
-          <div class="col-lg-2 col-sm-2">
             <div id="mydive">
-            <div id="mydivheadere"> <img src="Imagens/ima_e.png"> </div>
-            </div>
+            <div id="mydivheadere"> <img style="height: 36px; width: 172px;" src="Imagens/ima_e.png"> </div>
+            
           </div>
-          <div class="col-lg-1 col-sm-1">
-            <div id="mydivd">
-              <div id="mydivheaderd"> <img src="Imagens/ima_d.png"> </div>
-            </div>
+          
+            <div  id="mydivd">
+              <div id="mydivheaderd"> <img style=" margin-left:344px;height: 36px; width: 172px;" src="Imagens/ima_d.png"> </div>
+            
           </div>
-     </div>
+     </div></div></div>
      <div class="mt-2" style="text-align: center;" >
-      <button class="btn btn-success"   id="action-btn">Cortar ímã</button>
+      <button class="btn btn-success"   id="action-btn">Cortar ima</button>
     </div>
     </div>
     
@@ -80,7 +82,7 @@
     var button = document.getElementById("action-btn");
     
      button.addEventListener("click", function(){
-      var imap = document.getElementById("mydiv");
+      var imap = document.getElementById("mydivheader");
       var imae = document.getElementById("mydive");
       var imad = document.getElementById("mydivd");
       if(imap.style.display === "block"){
@@ -91,6 +93,7 @@
         imap.style.display = "block";
         imae.style.display = "none";
         imad.style.display = "none";
+        imad.style.objectPosition = "reset";
       }
      });
 
