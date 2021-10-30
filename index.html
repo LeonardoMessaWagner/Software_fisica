@@ -71,10 +71,10 @@
       
      <div class="container mt-2">
       
-       <div class="row align-items-center" style="height:600px; border: solid;background-color: rgb(151, 208, 255);">
+       <div  id="bg" class="row align-items-center " style="height:600px; border: solid;background-color: rgb(151, 208, 255);">
         <div id="menu">
           <h1 style="color: grey;">Software Física</h1>
-          <button class=" mt-2 btn btn-danger" id="sl1">Experimento X - Aula 1</button><br>
+          <button onclick=" muda_height();" class=" mt-2 btn btn-danger" id="sl1">Experimento X - Aula 1</button><br>
           <button class=" mt-2 btn btn-danger" id="aula2">Experimento X - Aula 2</button>
         </div><!--Fim MENU-->
        <!--lvl 1 inicio-->
@@ -88,13 +88,13 @@
           <div style="margin-left: 30%;" class="row align-items-center">
           <div class="col-lg-3">
             <div id="mydive">
-            <div id="mydivheadere"> <img style="height: 36px; width: 172px;" onclick="escolha()" src="Imagens/ima_e.png"> </div>
+            <div id="mydivheadere"> <img id="imaesquerdo" style="height: 36px; width: 172px;"  src="Imagens/ima_e.png"> </div>
             <div class="mt-2"> <img id="arrowe" style="height: 36px; width: 172px;" src="imagens/arrow.png"> </div>
           </div>
           </div>
           <div class="col-lg-3">
             <div  id="mydivd">
-              <div id="mydivheaderd"> <img style=" height: 36px; width: 172px;" onclick="escolha()" src="Imagens/ima_d.png"> </div>
+              <div id="mydivheaderd"> <img id="imadireito" style=" height: 36px; width: 172px;"  src="Imagens/ima_d.png"> </div>
               <div class="mt-2"> <img id="arrowd" style="height: 36px; width: 172px;transform: scaleX(-1);"   src="imagens/arrow.png"> </div>
           </div></div>  
      </div></div>
@@ -108,8 +108,9 @@
   
     <!--botões lvl 1-->
      <div id="botoes" class="mt-2" style="text-align: center;" >
-      <button class="btn btn-success"   id="action-btn">Cortar ima</button>
-      
+      <button class="btn btn-success" onclick="setas()"   id="action-btn">Cortar ima</button>
+      <button disabled class="btn btn-success" onclick="invertee()"  id="imaes">Inverter Ima esquerdo</button>
+      <button disabled class="btn btn-success" onclick="inverted()"  id="imadi">Inverter Ima direito</button>
         <button onclick="location.reload()" class="btn btn-danger" >Voltar</button>
     
       
@@ -157,16 +158,24 @@ lvl2.addEventListener("click",function(){
       var imap = document.getElementById("mydivheader");
       var imae = document.getElementById("mydive");
       var imad = document.getElementById("mydivd");
+      var ies = document.getElementById("imaes");
+      var idi = document.getElementById("imadi");
       if(imap.style.display === "block"){
         imap.style.display = "none";
         imae.style.display = "block";
         imad.style.display = "block";
         button.textContent = "juntar imas";
+        ies.disabled = false;
+        idi.disabled = false;
+        
       }else{
         imap.style.display = "block";
         imae.style.display = "none";
         imad.style.display = "none";
         button.textContent = "cortar imas";
+        ies.disabled = true;
+        idi.disabled = true;
+        
       }
      });
 
@@ -191,7 +200,7 @@ function dragElement(elmnt) {
     e.preventDefault();
     // get the mouse cursor position at startup:
     pos3 = e.clientX;
-    pos4 = e.clientY;
+    
     document.onmouseup = closeDragElement;
     // call a function whenever the cursor moves:
     document.onmousemove = elementDrag;
@@ -202,11 +211,11 @@ function dragElement(elmnt) {
     e.preventDefault();
     // calculate the new cursor position:
     pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
+    
     pos3 = e.clientX;
-    pos4 = e.clientY;
+ 
     // set the element's new position:
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
     reseta_post = elmnt.offsetTop - pos2;
 
@@ -239,7 +248,7 @@ function dragElement(elmnt) {
     e.preventDefault();
     // get the mouse cursor position at startup:
     pos3 = e.clientX;
-    pos4 = e.clientY;
+  
     document.onmouseup = closeDragElement;
     // call a function whenever the cursor moves:
     document.onmousemove = elementDrag;
@@ -250,11 +259,11 @@ function dragElement(elmnt) {
     e.preventDefault();
     // calculate the new cursor position:
     pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
+    
     pos3 = e.clientX;
-    pos4 = e.clientY;
+    
     // set the element's new position:
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
   }
 
@@ -286,7 +295,7 @@ function dragElement(elmnt) {
       e.preventDefault();
       // get the mouse cursor position at startup:
       pos3 = e.clientX;
-      pos4 = e.clientY;
+     
       document.onmouseup = closeDragElement;
       // call a function whenever the cursor moves:
       document.onmousemove = elementDrag;
@@ -297,11 +306,11 @@ function dragElement(elmnt) {
       e.preventDefault();
       // calculate the new cursor position:
       pos1 = pos3 - e.clientX;
-      pos2 = pos4 - e.clientY;
+    
       pos3 = e.clientX;
-      pos4 = e.clientY;
+   
       // set the element's new position:
-      elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+   
       elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
     }
   
@@ -315,30 +324,56 @@ function dragElement(elmnt) {
       </script>
       <!--apontamento das flechas-->
       <script type="text/javascript">
-      var ima_esquerdo = document.getElementById("arrowe");
-      var ima_direito = document.getElementById("arrowd");
-      var x = 0;
-      function inverte_esquerda(){
-        ima_esquerdo.style.transform = "scaleX(-1)";
-        ima_direito.style.transform = "scaleX(1)";       
+      var ima_esquerdo = document.getElementById("imaesquerdo");
+      var ima_direito = document.getElementById("imadireito");
+      var imae = 's';
+      var imad = 'n';
+      
+      
+      function Setas(x,y){
+        var flecha_esquerda = document.getElementById("arrowe");
+        var flecha_direita = document.getElementById("arrowd");
+        if ((x === 's' && y === 'n') ||(x ==='n' && y ==='s')){
+          flecha_direita.style.transform = "scaleX(-1)";
+          flecha_esquerda.style.transform = "scaleX(1)";
         }
-        function inverte_direita(){
-        ima_esquerdo.style.transform = "scaleX(1)";
-        ima_direito.style.transform = "scaleX(-1)";       
-        }  
-      function escolha(){
-        
-        if ( x === 0){
-          inverte_esquerda();
-          x = 1;
-        }
-        else if(x === 1){
-          inverte_direita();
-          x = 0;
+        else{
+          flecha_direita.style.transform = "scaleX(1)";
+          flecha_esquerda.style.transform = "scaleX(-1)";
         }
       }
       
+      function invertee(){
+        if(imae === 's'){
+        ima_esquerdo.style.transform = "scaleX(-1)";
+        imae = 'n';}
+        else{
+          ima_esquerdo.style.transform = "scaleX(1)";
+        imae = 's';
+        }
+        Setas(imae,imad);
+      }
+      function inverted(){
+        if(imad === 'n'){
+        ima_direito.style.transform = "scaleX(-1)";
+        imad = 's';}
+        else{
+          ima_direito.style.transform = "scaleX(1)";
+        imad = 'n';
+        }
+        Setas(imae,imad);
+      }
+      
       </script>
+<!--ajustes do background lvl 1-->
+    <script type="text/javascript">
+    function muda_height(){
+      var bg = document.getElementById("bg");
+      bg.style.height = "200px";
+      bg.style.marginTop= "200px";
+    }
+  
+    </script>
       
       <!--fim js lvl 1-->
       <!--js lvl 2-->
