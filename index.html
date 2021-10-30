@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        <meta content="charset=utf-8">
+      <meta charset="UTF-8">
        
         <link href="css/bootstrap.css" rel= "stylesheet">
-        <title id="titulo">Software fisica</title>
+        <title id="titulo">Software física</title>
     </head>
     <!--CSS lvl 1 -->
     <style>
@@ -116,6 +116,7 @@
     </div><!--Fim lvl 1-->
     <div class="mt-2" style="display: none; text-align: center;" id="botoeslvl2">
       <button id="lincam" onclick="linha_campo()" class="btn btn-success">Linhas de campo</button>
+      <button id="lincam2" onclick="linha_campo2()" class="btn btn-success">Terra</button>
       <button onclick="location.reload()" class="btn btn-danger" >Voltar</button>
     </div>
     </div> 
@@ -342,18 +343,46 @@ function dragElement(elmnt) {
       <!--fim js lvl 1-->
       <!--js lvl 2-->
       <script>
+      
+
         var bg = document.querySelector("#linha_camps");
         var bt = document.getElementById("lincam");
+        var bg2 = document.querySelector("#linha_camps");
+        var bt2 = document.getElementById("lincam2");
+        var bg2i = document.getElementById("linha_camps");
         function linha_campo(){
             if (bt.textContent === "Linhas de campo"){
               bg.setAttribute('src','Imagens/linha_de_campo_com_ima.png');
               bt.textContent = "Ocultar Linhas de Campo";
+              bt2.disabled = true;
             }
             else{
               bg.setAttribute('src', 'Imagens/ima.png');
               bt.textContent = "Linhas de campo";
+              bt2.disabled = false;
             }
         }
+        
+       
+        function linha_campo2(){
+            if (bt2.textContent === "Terra"){
+              bg2.setAttribute('src','Imagens/terraimalinhas.png');
+              
+              bg2i.style.width = "350px";
+              bg2i.style.height = "400px";
+              bt2.textContent = "Ima";
+              bt.disabled = true;
+            }
+            else{
+              bg2.setAttribute('src', 'Imagens/ima.png');
+              bt2.textContent = "Terra";
+              bg2i.style.width = "auto";
+              bg2i.style.height = "auto";
+              bt.disabled = false;
+            }
+        }
+        
+              
       </script>
     </body>
 </html>
