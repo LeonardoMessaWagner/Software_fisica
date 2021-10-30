@@ -88,13 +88,13 @@
           <div style="margin-left: 30%;" class="row align-items-center">
           <div class="col-lg-3">
             <div id="mydive">
-            <div id="mydivheadere"> <img id="imaesquerdo" style="height: 36px; width: 172px;"  src="Imagens/ima_e.png"> </div>
+            <div id="mydivheadere"> <img id="imaesquerdo" style="height: 36px; width: 172px;" onmouseup="posicao();" src="Imagens/ima_e.png"> </div>
             <div class="mt-2"> <img id="arrowe" style="height: 36px; width: 172px;" src="imagens/arrow.png"> </div>
           </div>
           </div>
           <div class="col-lg-3">
             <div  id="mydivd">
-              <div id="mydivheaderd"> <img id="imadireito" style=" height: 36px; width: 172px;"  src="Imagens/ima_d.png"> </div>
+              <div id="mydivheaderd"> <img id="imadireito" style=" height: 36px; width: 172px;" onmouseup="posicao()" src="Imagens/ima_d.png"> </div>
               <div class="mt-2"> <img id="arrowd" style="height: 36px; width: 172px;transform: scaleX(-1);"   src="imagens/arrow.png"> </div>
           </div></div>  
      </div></div>
@@ -108,7 +108,7 @@
   
     <!--botões lvl 1-->
      <div id="botoes" class="mt-2" style="text-align: center;" >
-      <button class="btn btn-success" onclick="setas()"   id="action-btn">Cortar ima</button>
+      <button class="btn btn-success"  onclick="break_ima()"  id="action-btn">cortar imas</button>
       <button disabled class="btn btn-success" onclick="invertee()"  id="imaes">Inverter Ima esquerdo</button>
       <button disabled class="btn btn-success" onclick="inverted()"  id="imadi">Inverter Ima direito</button>
         <button onclick="location.reload()" class="btn btn-danger" >Voltar</button>
@@ -152,23 +152,28 @@ lvl2.addEventListener("click",function(){
     </script>
     <!-- esconder_mostrar imas-->
     <script type="text/javascript">
-    var button = document.getElementById("action-btn");
     
-     button.addEventListener("click", function(){
-      var imap = document.getElementById("mydivheader");
+    
+     function break_ima(){
+      
+       var button = document.getElementById("action-btn");
+       var imap = document.getElementById("mydivheader");
       var imae = document.getElementById("mydive");
       var imad = document.getElementById("mydivd");
       var ies = document.getElementById("imaes");
       var idi = document.getElementById("imadi");
-      if(imap.style.display === "block"){
+       if(button.textContent != "juntar imas"){
+      
+      
         imap.style.display = "none";
         imae.style.display = "block";
         imad.style.display = "block";
         button.textContent = "juntar imas";
         ies.disabled = false;
-        idi.disabled = false;
-        
-      }else{
+        idi.disabled = false;}
+     
+      
+      else{
         imap.style.display = "block";
         imae.style.display = "none";
         imad.style.display = "none";
@@ -176,8 +181,8 @@ lvl2.addEventListener("click",function(){
         ies.disabled = true;
         idi.disabled = true;
         
-      }
-     });
+      }}
+     
 
     </script>
      <!-- ima inteiro js-->      
@@ -228,11 +233,12 @@ function dragElement(elmnt) {
   }
 }
     </script>
-
+  
     <!--Ima esquerdo js -->
     <script type="text/Javascript">
+    
     dragElement(document.getElementById("mydive"));
-
+  
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   if (document.getElementById(elmnt.id + "headere")) {
@@ -261,7 +267,6 @@ function dragElement(elmnt) {
     pos1 = pos3 - e.clientX;
     
     pos3 = e.clientX;
-    
     // set the element's new position:
     
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
@@ -274,10 +279,9 @@ function dragElement(elmnt) {
   }
 }
     
-    </script>
-
-    <!--Ima direito js -->
-    <script type="text/Javascript">
+    
+    //<!--Ima direito js -->
+    
       dragElement(document.getElementById("mydivd"));
   
   function dragElement(elmnt) {
@@ -308,7 +312,8 @@ function dragElement(elmnt) {
       pos1 = pos3 - e.clientX;
     
       pos3 = e.clientX;
-   
+      
+      
       // set the element's new position:
    
       elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
@@ -320,7 +325,7 @@ function dragElement(elmnt) {
       document.onmousemove = null;
     }
   }
-      
+  
       </script>
       <!--apontamento das flechas-->
       <script type="text/javascript">
@@ -328,7 +333,7 @@ function dragElement(elmnt) {
       var ima_direito = document.getElementById("imadireito");
       var imae = 's';
       var imad = 'n';
-      
+     
       
       function Setas(x,y){
         var flecha_esquerda = document.getElementById("arrowe");
@@ -363,7 +368,26 @@ function dragElement(elmnt) {
         }
         Setas(imae,imad);
       }
-      
+      function posicao() {
+        var sete = document.getElementById("arrowe");
+        var setd = document.getElementById("arrowd");
+        var ie = document.getElementById("imaesquerdo");
+        var coordenadasi = ie.getBoundingClientRect();
+        var id = document.getElementById("imadireito");
+        var coordenadasd = id.getBoundingClientRect();
+        if (coordenadasd.left < coordenadasi.left){
+            sete.style.transform = "ScaleX(-1)";
+            setd.style.transform = "ScaleX(1)";
+            imae = 'n';
+            imad = 's';
+        }
+        else if(coordenadasd.left > coordenadasi.left){
+            sete.style.transform = "ScaleX(1)";
+            setd.style.transform = "ScaleX(-1)";
+            imae = 's';
+            imad = 'n';
+        }
+}
       </script>
 <!--ajustes do background lvl 1-->
     <script type="text/javascript">
