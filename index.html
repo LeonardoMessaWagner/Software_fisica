@@ -59,6 +59,13 @@
   text-align: center;
   
 }
+
+/* lvl 2 */
+#lvl2{
+  display: none;
+  text-align: center;
+  align-items: center;
+}
     </style>
     <body>
       
@@ -67,7 +74,8 @@
        <div class="row align-items-center" style="height:600px; border: solid;background-color: rgb(151, 208, 255);">
         <div id="menu">
           <h1 style="color: grey;">Software Física</h1>
-          <button class=" mt-2 btn btn-danger" id="sl1">Experimento X - Aula 1</button>
+          <button class=" mt-2 btn btn-danger" id="sl1">Experimento X - Aula 1</button><br>
+          <button class=" mt-2 btn btn-danger" id="aula2">Experimento X - Aula 2</button>
         </div><!--Fim MENU-->
        <!--lvl 1 inicio-->
       <div id="mydiv">
@@ -89,15 +97,29 @@
               <div id="mydivheaderd"> <img style=" height: 36px; width: 172px;" onclick="escolha()" src="Imagens/ima_d.png"> </div>
               <div class="mt-2"> <img id="arrowd" style="height: 36px; width: 172px;transform: scaleX(-1);"   src="imagens/arrow.png"> </div>
           </div></div>  
-     </div></div></div>
+     </div></div>
+    <div    id="lvl2">
+
+      <img id="linha_camps"  src="Imagens/ima.png">
+      
+      
+    </div>
+    </div>
+  
+    <!--botões lvl 1-->
      <div id="botoes" class="mt-2" style="text-align: center;" >
       <button class="btn btn-success"   id="action-btn">Cortar ima</button>
       
         <button onclick="location.reload()" class="btn btn-danger" >Voltar</button>
     
       
+    </div><!--Fim lvl 1-->
+    <div class="mt-2" style="display: none; text-align: center;" id="botoeslvl2">
+      <button id="lincam" onclick="linha_campo()" class="btn btn-success">Linhas de campo</button>
+      <button onclick="location.reload()" class="btn btn-danger" >Voltar</button>
     </div>
-    </div> <!--Fim lvl 1-->
+    </div> 
+
 
     <!--comandos MENU--><script type="text/javascript"> 
 var lvl1 = document.getElementById("sl1");
@@ -108,6 +130,18 @@ lvl1.addEventListener("click",function(){
   nivel1.style.display = "block";
   var escmenu = document.getElementById("menu");
   escmenu.style.display = "none";
+})
+
+// lvl 2
+
+var lvl2 = document.getElementById("aula2");
+lvl2.addEventListener("click",function(){
+  var escmenu = document.getElementById("menu");
+  escmenu.style.display = "none";
+  var mlvl2 = document.getElementById("lvl2");
+  mlvl2.style.display= "block";
+  var lc = document.getElementById("botoeslvl2");
+  lc.style.display="block";
 })
     </script>
     <!--inicio js lvl 1-->
@@ -306,5 +340,20 @@ function dragElement(elmnt) {
       </script>
       
       <!--fim js lvl 1-->
+      <!--js lvl 2-->
+      <script>
+        var bg = document.querySelector("#linha_camps");
+        var bt = document.getElementById("lincam");
+        function linha_campo(){
+            if (bt.textContent === "Linhas de campo"){
+              bg.setAttribute('src','Imagens/linha_de_campo_com_ima.png');
+              bt.textContent = "Ocultar Linhas de Campo";
+            }
+            else{
+              bg.setAttribute('src', 'Imagens/ima.png');
+              bt.textContent = "Linhas de campo";
+            }
+        }
+      </script>
     </body>
 </html>
