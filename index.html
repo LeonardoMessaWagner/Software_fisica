@@ -4,12 +4,13 @@
         <meta content="charset=utf-8">
        
         <link href="css/bootstrap.css" rel= "stylesheet">
-        <title>teste 01</title>
+        <title id="titulo">Software fisica</title>
     </head>
+    <!--CSS lvl 1 -->
     <style>
       /* ima inteiro */
         #mydiv {
-          display: block;
+          display: none;
   position: absolute;
   z-index: 9;
   text-align: center;
@@ -49,34 +50,60 @@
   cursor: move;
   z-index: 10; 
 }
+#botoes{
+  display: none;
+} /* Fim CSS lvl 1 */
 
+/* CSS MENU iNICIO*/
+#menu{
+  text-align: center;
+  
+}
     </style>
     <body>
      <div class="container mt-2">
        <div class="row align-items-center" style="height:600px; border: solid;background-color: rgb(151, 208, 255);">
+        <div id="menu">
+          <h1 style="color: grey;">Software Física</h1>
+          <button class=" mt-2 btn btn-danger" id="sl1">Nivel 1</button>
+        </div><!--Fim MENU-->
+       <!--lvl 1 inicio-->
       <div id="mydiv">
-            <div >
+            <div>
                 <div id="mydivheader"><img  src="Imagens/ima.png"></div>
             
             
           </div>
-          <div class="row align-items-center">
-          
+          <div style="margin-left: 30%;" class="row align-items-center">
+          <div class="col-lg-3">
             <div id="mydive">
             <div id="mydivheadere"> <img style="height: 36px; width: 172px;" src="Imagens/ima_e.png"> </div>
-            
           </div>
-          
+          </div>
+          <div class="col-lg-3">
             <div  id="mydivd">
-              <div id="mydivheaderd"> <img style=" margin-left:344px;height: 36px; width: 172px;" src="Imagens/ima_d.png"> </div>
+              <div id="mydivheaderd"> <img style=" height: 36px; width: 172px;" src="Imagens/ima_d.png"> </div>
             
-          </div>
+          </div></div>  
      </div></div></div>
-     <div class="mt-2" style="text-align: center;" >
+     <div id="botoes" class="mt-2" style="text-align: center;" >
       <button class="btn btn-success"   id="action-btn">Cortar ima</button>
+      <button class="btn btn-success" onclick="location.reload()">Resetar Imas</button>
     </div>
-    </div>
-    
+    </div> <!--Fim lvl 1-->
+
+    <!--comandos MENU--><script type="text/javascript"> 
+var lvl1 = document.getElementById("sl1");
+lvl1.addEventListener("click",function(){
+  var bot = document.getElementById("botoes");
+  var nivel1 = document.getElementById("mydiv");
+  bot.style.display = "block";
+  nivel1.style.display = "block";
+  var escmenu = document.getElementById("menu");
+  escmenu.style.display = "none";
+})
+    </script>
+    <!--inicio js lvl 1-->
     <!-- esconder_mostrar imas-->
     <script type="text/javascript">
     var button = document.getElementById("action-btn");
@@ -89,11 +116,12 @@
         imap.style.display = "none";
         imae.style.display = "block";
         imad.style.display = "block";
+        button.textContent = "juntar imas";
       }else{
         imap.style.display = "block";
         imae.style.display = "none";
         imad.style.display = "none";
-        imad.style.objectPosition = "reset";
+        button.textContent = "cortar imas";
       }
      });
 
@@ -236,6 +264,6 @@ function dragElement(elmnt) {
     }
   }
       
-      </script>
+      </script> <!--fim js lvl 1-->
     </body>
 </html>
