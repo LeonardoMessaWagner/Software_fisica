@@ -88,13 +88,13 @@
           <div style="margin-left: 30%;" class="row align-items-center">
           <div class="col-lg-3">
             <div id="mydive">
-            <div id="mydivheadere"> <img id="imaesquerdo" style="height: 36px; width: 172px;" onmouseup="posicao();" src="Imagens/ima_e.png"> </div>
+            <div id="mydivheadere"> <img id="imaesquerdo" style="height: 36px; width: 172px;" onclick="ima1.check_posicao(ima2.body_ima,ima2.posicao);ima1.checkPolaridade(ima2.poloesquerdo,ima2.polodireito,ima2.seta)" src="Imagens/ima_e.png"> </div>
             <div class="mt-2"> <img id="arrowe" style="height: 36px; width: 172px;" src="imagens/arrow.png"> </div>
           </div>
           </div>
           <div class="col-lg-3">
             <div  id="mydivd">
-              <div id="mydivheaderd"> <img id="imadireito" style=" height: 36px; width: 172px;" onmouseup="posicao()" src="Imagens/ima_d.png"> </div>
+              <div id="mydivheaderd"> <img id="imadireito" style=" height: 36px; width: 172px;" onclick="ima2.check_posicao(ima1.body_ima,ima2.posicao);ima2.checkPolaridade(ima1.poloesquerdo,ima1.polodireito,ima1.seta)" src="Imagens/ima_d.png"> </div>
               <div class="mt-2"> <img id="arrowd" style="height: 36px; width: 172px;transform: scaleX(-1);"   src="imagens/arrow.png"> </div>
           </div></div>  
      </div></div>
@@ -109,8 +109,8 @@
     <!--botões lvl 1-->
      <div id="botoes" class="mt-2" style="text-align: center;" >
       <button class="btn btn-success"  onclick="break_ima()"  id="action-btn">cortar imas</button>
-      <button disabled class="btn btn-success" onclick="invertee()"  id="imaes">Inverter Ima esquerdo</button>
-      <button disabled class="btn btn-success" onclick="inverted()"  id="imadi">Inverter Ima direito</button>
+      <button disabled class="btn btn-success" onclick="ima1.inverter(); ima1.checkPolaridade(ima2.poloesquerdo,ima2.polodireito,ima2.seta)"  id="imaes">Inverter Ima esquerdo</button>
+      <button disabled class="btn btn-success" onclick="ima2.inverter(); ima2.checkPolaridade(ima1.poloesquerdo,ima1.polodireito,ima1.seta)"  id="imadi">Inverter Ima direito</button>
         <button onclick="location.reload()" class="btn btn-danger" >Voltar</button>
     
       
@@ -328,66 +328,88 @@ function dragElement(elmnt) {
   
       </script>
       <!--apontamento das flechas-->
-      <script type="text/javascript">
-      var ima_esquerdo = document.getElementById("imaesquerdo");
-      var ima_direito = document.getElementById("imadireito");
-      var imae = 's';
-      var imad = 'n';
-     
-      
-      function Setas(x,y){
-        var flecha_esquerda = document.getElementById("arrowe");
-        var flecha_direita = document.getElementById("arrowd");
-        if ((x === 's' && y === 'n') ||(x ==='n' && y ==='s')){
-          flecha_direita.style.transform = "scaleX(-1)";
-          flecha_esquerda.style.transform = "scaleX(1)";
-        }
-        else{
-          flecha_direita.style.transform = "scaleX(1)";
-          flecha_esquerda.style.transform = "scaleX(-1)";
-        }
-      }
-      
-      function invertee(){
-        if(imae === 's'){
-        ima_esquerdo.style.transform = "scaleX(-1)";
-        imae = 'n';}
-        else{
-          ima_esquerdo.style.transform = "scaleX(1)";
-        imae = 's';
-        }
-        Setas(imae,imad);
-      }
-      function inverted(){
-        if(imad === 'n'){
-        ima_direito.style.transform = "scaleX(-1)";
-        imad = 's';}
-        else{
-          ima_direito.style.transform = "scaleX(1)";
-        imad = 'n';
-        }
-        Setas(imae,imad);
-      }
-      function posicao() {
-        var sete = document.getElementById("arrowe");
-        var setd = document.getElementById("arrowd");
-        var ie = document.getElementById("imaesquerdo");
-        var coordenadasi = ie.getBoundingClientRect();
-        var id = document.getElementById("imadireito");
-        var coordenadasd = id.getBoundingClientRect();
-        if (coordenadasd.left < coordenadasi.left){
-            sete.style.transform = "ScaleX(-1)";
-            setd.style.transform = "ScaleX(1)";
-            imae = 'n';
-            imad = 's';
-        }
-        else if(coordenadasd.left > coordenadasi.left){
-            sete.style.transform = "ScaleX(1)";
-            setd.style.transform = "ScaleX(-1)";
-            imae = 's';
-            imad = 'n';
-        }
-}
+      <script>
+       
+        class Ima {
+           constructor(w,x,y,z,x2,x3) {
+            this.body_ima = w;
+            this.poloesquerdo = x;
+            this.polodireito = y;
+            this.posicao = z;
+            this.inversao= x2;
+            this.seta = x3;
+           }
+           checkPolaridade(x,y,z){
+              if(this.inversao != null){// checa se o ima esta invertido ou n
+                this.poloesquerdo = "S";
+                this.polodireito = "N";
+              }
+              else{
+                this.poloesquerdo = "N";
+                this.polodireito = "S";
+              }
+                switch(this.posicao){
+                  case "esquerda":
+                  if(this.poloesquerdo == x && this.polodireito == y){//se entrar aqui os imas se atraem
+                    this.seta.style.transform = "scaleX(1)";
+                    z.style.transform = "scaleX(-1)";
+                  }
+                  else{//se nao eles se afastam
+                    this.seta.style.transform = "scaleX(-1)";
+                    z.style.transform = "scaleX(1)";
+                  }
+                  break;
+                  default:
+                  if(this.poloesquerdo == x && this.polodireito == y){//se entrar aqui os imas se atraem
+                    this.seta.style.transform = "scaleX(-1)";
+                    z.style.transform = "scaleX(1)";
+                  }
+                  else{//se nao eles se afastam
+                    this.seta.style.transform = "scaleX(1)";
+                    z.style.transform = "scaleX(-1)";
+                  }
+                }
+            }
+            tamanhoSeta(a){
+              if(a > 0){
+                document.getElementById("arrowe").style.width = "50%";
+              }
+            }
+            check_posicao(bodyOtherIma,posicaoOtherIma){
+              var  cordthis = this.body_ima.getBoundingClientRect();
+              var  corother = bodyOtherIma.getBoundingClientRect();
+              var diferenca = 0;
+              if(this.posicao == "esquerda" && cordthis.left > corother.left){
+                this.posicao = "direita";
+                posicaoOtherIma = "esquerda";
+                this.tamanhoSeta(diferenca);
+              }
+              else if (this.posicao == "direita" && cordthis.left < corother.left){
+                this.posicao = "esquerda";
+                posicaoOtherIma = "direita";
+              }
+            }
+            
+          
+            inverter() {
+              if(this.inversao == null){
+                this.body_ima.style.transform = "scaleX(-1)";
+                this.inversao = 1;
+                
+              }
+              else{
+                this.body_ima.style.transform = "scaleX(1)";
+                this.inversao = null;
+              }
+            }
+          }
+
+        var ima1 =  new Ima(document.getElementById("imaesquerdo"),"N","S","esquerda",null,document.getElementById("arrowe"));
+        var ima2 = new Ima(document.getElementById("imadireito"),"N","S","direita",null,document.getElementById("arrowd"));//scaleX(-1)
+        
+        
+
+        
       </script>
 <!--ajustes do background lvl 1-->
     <script type="text/javascript">
